@@ -14,11 +14,11 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Layanan')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="document" :href="route('dokumen')" :current="request()->routeIs('dokumen')" wire:navigate>{{ __('Dokumen') }}</flux:navlist.item>
-                    <flux:navlist.item icon="archive-box" :href="route('arsip')" :current="request()->routeIs('arsip')" wire:navigate>{{ __('Arsip') }}</flux:navlist.item>
-                    <flux:navlist.item icon="users" :href="route('pegawai')" :current="request()->routeIs('pegawai')" wire:navigate>{{ __('Pegawai') }}</flux:navlist.item>
-                    <flux:navlist.item icon="pencil-square" :href="route('surat')" :current="request()->routeIs('surat')" wire:navigate>{{ __('Surat') }}</flux:navlist.item>
-                    <flux:navlist.item icon="newspaper" :href="route('berita')" :current="request()->routeIs('berita')" wire:navigate>{{ __('Berita') }}</flux:navlist.item>
+                    <flux:navlist.item icon="document" :href="route('dokumen.index')" :current="request()->routeIs('dokumen.index')" wire:navigate>{{ __('Dokumen') }}</flux:navlist.item>
+                    <flux:navlist.item icon="archive-box" :href="route('arsip.index')" :current="request()->routeIs('arsip.index')" wire:navigate>{{ __('Arsip') }}</flux:navlist.item>
+                    <flux:navlist.item icon="users" :href="route('aktivitas-pegawai.index')" :current="request()->routeIs('aktivitas-pegawai.index')" wire:navigate>{{ __('Pegawai') }}</flux:navlist.item>
+                    <flux:navlist.item icon="pencil-square" :href="route('surat.index')" :current="request()->routeIs('surat.index')" wire:navigate>{{ __('Surat') }}</flux:navlist.item>
+                    <flux:navlist.item icon="newspaper" :href="route('berita.index')" :current="request()->routeIs('berita.index')" wire:navigate>{{ __('Berita') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -26,7 +26,7 @@
                 <flux:navlist.group :heading="__('Lainnya')" class="grid">
                     <flux:navlist.item icon="building-office" :href="route('informasi')" :current="request()->routeIs('informasi')" wire:navigate>{{ __('Informasi') }}</flux:navlist.item>
                     <flux:navlist.item icon="inbox" :href="route('layananpublik')" :current="request()->routeIs('layananpublik')" wire:navigate>{{ __('Layanan') }}</flux:navlist.item>
-                    <flux:navlist.item icon="arrow-down-tray" :href="route('download')" :current="request()->routeIs('download')" wire:navigate>{{ __('Download') }}</flux:navlist.item>
+                    <flux:navlist.item icon="arrow-down-tray" :href="route('download.index')" :current="request()->routeIs('download.index')" wire:navigate>{{ __('Download') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

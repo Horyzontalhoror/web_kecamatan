@@ -1,0 +1,4 @@
+laravel store:
+php artisan storage:link
+laravel pdf:
+composer require barryvdh/laravel-dompdf
