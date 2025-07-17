@@ -9,19 +9,19 @@
                 {{-- Input Nama Pegawai --}}
                 <div>
                     <label for="nama_pegawai" class="block text-sm font-medium">Nama Pegawai</label>
-                    <input type="text" name="nama_pegawai" id="nama_pegawai" required class="w-full mt-1"
+                    <input type="text" name="nama_pegawai" id="nama_pegawai" required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800"
                         value="{{ old('nama_pegawai', $aktivitas->nama_pegawai) }}">
                 </div>
                 {{-- Input Tanggal --}}
                 <div>
                     <label for="tanggal_aktivitas" class="block text-sm font-medium">Tanggal Aktivitas</label>
-                    <input type="date" name="tanggal_aktivitas" id="tanggal_aktivitas" required class="w-full mt-1"
+                    <input type="date" name="tanggal_aktivitas" id="tanggal_aktivitas" required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800"
                         value="{{ old('tanggal_aktivitas', $aktivitas->tanggal_aktivitas->format('Y-m-d')) }}">
                 </div>
                 {{-- Input Deskripsi --}}
                 <div>
                     <label for="deskripsi" class="block text-sm font-medium">Deskripsi Aktivitas</label>
-                    <textarea name="deskripsi" id="deskripsi" rows="3" required class="w-full mt-1">{{ old('deskripsi', $aktivitas->deskripsi) }}</textarea>
+                    <textarea name="deskripsi" id="deskripsi" rows="3" required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800">{{ old('deskripsi', $aktivitas->deskripsi) }}</textarea>
                 </div>
                 <button type="submit"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md

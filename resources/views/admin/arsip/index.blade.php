@@ -26,14 +26,14 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <label for="kategori" class="block text-sm font-medium">Kategori Surat</label>
-                        <select name="kategori" id="kategori" required class="w-full mt-1">
+                        <select name="kategori" id="kategori" required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800">
                             <option>Surat Masuk</option>
                             <option>Surat Keluar</option>
                         </select>
                     </div>
                     <div>
                         <label for="tanggal_arsip" class="block text-sm font-medium">Tanggal Arsip</label>
-                        <input type="date" name="tanggal_arsip" id="tanggal_arsip" required class="w-full mt-1" />
+                        <input type="date" name="tanggal_arsip" id="tanggal_arsip" required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800" />
                     </div>
                 </div>
                 <button type="submit"
@@ -48,8 +48,8 @@
             <h3 class="text-lg font-semibold">📁 Pencarian Arsip</h3>
             <form method="GET" action="{{ route('arsip.index') }}" class="flex items-center gap-2">
                 <input type="text" name="search" placeholder="Cari berdasarkan nama/kategori"
-                    value="{{ request('search') }}" class="flex-1" />
-                <button type="submit" class="px-4 py-2 bg-gray-700 text-white ...">Cari</button>
+                    value="{{ request('search') }}" class="flex-1 dark:text-neutral-200 bg-white dark:bg-neutral-800" />
+                <button type="submit" class="px-4 py-2 bg-gray-700 text-white">Cari</button>
             </form>
         </div>
 

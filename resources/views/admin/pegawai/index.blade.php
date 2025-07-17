@@ -24,21 +24,21 @@
                 @csrf
                 {{-- Input Nama Pegawai --}}
                 <div>
-                    <label for="nama_pegawai" class="block text-sm font-medium">Nama Pegawai</label>
+                    <label for="nama_pegawai" class="block text-sm font-medium dark:text-neutral-200 bg-white dark:bg-neutral-800">Nama Pegawai</label>
                     <input type="text" name="nama_pegawai" id="nama_pegawai" placeholder="Masukkan nama lengkap"
-                        required class="w-full mt-1 ...">
+                        required class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800">
                 </div>
                 {{-- Input Tanggal --}}
                 <div>
-                    <label for="tanggal_aktivitas" class="block text-sm font-medium">Tanggal Aktivitas</label>
+                    <label for="tanggal_aktivitas" class="block text-sm font-medium dark:text-neutral-200 bg-white dark:bg-neutral-800">Tanggal Aktivitas</label>
                     <input type="date" name="tanggal_aktivitas" id="tanggal_aktivitas" required
-                        class="w-full mt-1 ...">
+                        class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800">
                 </div>
                 {{-- Input Deskripsi --}}
                 <div>
-                    <label for="deskripsi" class="block text-sm font-medium">Deskripsi Aktivitas</label>
+                    <label for="deskripsi" class="block text-sm font-medium dark:text-neutral-200 bg-white dark:bg-neutral-800">Deskripsi Aktivitas</label>
                     <textarea name="deskripsi" id="deskripsi" rows="3" placeholder="Contoh: Rapat koordinasi..." required
-                        class="w-full mt-1 ..."></textarea>
+                        class="w-full mt-1 dark:text-neutral-200 bg-white dark:bg-neutral-800"></textarea>
                 </div>
                 <button type="submit"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md

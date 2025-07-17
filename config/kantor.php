@@ -10,4 +10,11 @@ return [
         'Surat Keterangan Tidak Mampu',
         'Surat Pengantar SKCK',
     ],
+    // TAMBAHKAN ARRAY INI
+    'kode_surat' => [
+        'Surat Keterangan Usaha' => 'SKU',
+        'Surat Keterangan Domisili' => 'SKD',
+        'Surat Keterangan Tidak Mampu' => 'SKTM',
+        'Surat Pengantar SKCK' => 'SPS',
+    ],
 ];

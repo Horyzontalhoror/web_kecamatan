@@ -23,22 +23,27 @@ class SuratController extends Controller
         $validated = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'kontak' => 'required|string|max:100',
+            'keterangan' => 'nullable|string',
             'jenis_surat' => ['required', Rule::in(config('kantor.jenis_surat'))],
         ]);
+        $validated['dokumen_pendukung'] = null;
 
         Surat::create($validated);
-        return back()->with('success', 'Permohonan surat berhasil dikirim.');
+        return back()->with('success', 'Permohonan surat berhasil ditambahkan.');
     }
 
     public function updateStatus(Request $request, Surat $surat)
     {
-        // 1. Generate Nomor Surat (jika belum ada)
+        $updateData = ['status' => 'Selesai'];
+
+        // Generate Nomor Surat hanya jika belum ada.
         if (!$surat->nomor_surat) {
-            $surat->update(['nomor_surat' => $this->generateNomorSurat($surat)]);
+            $updateData['nomor_surat'] = $this->generateNomorSurat($surat);
         }
 
-        // 2. Update status menjadi Selesai
-        $surat->update(['status' => 'Selesai']);
+        // Satu kali panggilan update ke database.
+        $surat->update($updateData);
 
         return back()->with('success', 'Status surat telah diperbarui.');
     }
@@ -55,10 +60,9 @@ class SuratController extends Controller
 
     public function generatePdf(Surat $surat)
     {
-        // Generate nomor surat jika belum ada
+        // Generate nomor surat jika belum ada.
         if (!$surat->nomor_surat) {
             $surat->nomor_surat = $this->generateNomorSurat($surat);
-            $surat->save();
         }
 
         $pdf = Pdf::loadView('admin.surat.pdf_template', compact('surat'));
@@ -66,19 +70,58 @@ class SuratController extends Controller
         $path = 'surat-warga/' . $filename;
         Storage::disk('public')->put($path, $pdf->output());
 
-        $surat->update(['path_pdf' => $path]);
+        // Update path PDF dan nomor surat (jika baru dibuat) dalam satu query.
+        $surat->path_pdf = $path;
+        $surat->save();
+
         return $pdf->download($filename);
     }
 
-    // Fungsi untuk membuat nomor surat otomatis
-    private function generateNomorSurat(Surat $surat)
+    /**
+     * Fungsi untuk membuat nomor surat otomatis yang lebih baik.
+     */
+    private function generateNomorSurat(Surat $surat): string
     {
         $bulanRomawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
         $bulan = $bulanRomawi[date('n') - 1];
         $tahun = date('Y');
-        $nomorUrut = str_pad($surat->id, 3, '0', STR_PAD_LEFT); // Nomor urut berdasarkan ID
+        $nomorUrut = str_pad($surat->id, 3, '0', STR_PAD_LEFT);
 
-        // Contoh Format: 001/SKU/VII/2025
-        return $nomorUrut . '/SK-' . strtoupper(substr($surat->jenis_surat, 17, 3)) . '/' . $bulan . '/' . $tahun;
+        // Mengambil kode surat dari config, bukan substr(). Lebih aman!
+        $kodeSurat = config('kantor.kode_surat')[$surat->jenis_surat] ?? 'KETERANGAN';
+
+        // Format: 001/SKU/VII/2025
+        return "{$nomorUrut}/{$kodeSurat}/{$bulan}/{$tahun}";
+    }
+    /**
+     * Display the specified resource.
+     */
+    public function show(Surat $surat)
+    {
+        return view('admin.surat.show', compact('surat'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Surat $surat)
+    {
+        // Best practice: Delete the associated file before deleting the record.
+        if ($surat->path_pdf && Storage::disk('public')->exists($surat->path_pdf)) {
+            Storage::disk('public')->delete($surat->path_pdf);
+        }
+
+        // Also delete supporting documents if necessary
+        if (is_array($surat->dokumen_pendukung)) {
+            foreach ($surat->dokumen_pendukung as $dok) {
+                if (Storage::disk('public')->exists($dok)) {
+                    Storage::disk('public')->delete($dok);
+                }
+            }
+        }
+
+        $surat->delete();
+
+        return redirect()->route('surat.index')->with('success', 'Permohonan surat berhasil dihapus.');
     }
 }

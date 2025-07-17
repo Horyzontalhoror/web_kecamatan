@@ -26,6 +26,10 @@
         {{-- orgchart --}}
         <script src="https://balkan.app/js/OrgChart.js"></script>
 
+        {{-- unpkg.com --}}
+        <script src="//unpkg.com/alpinejs" defer></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <body class="bg-[url(/img/mountains.jpg)] bg-fixed>
         @include('partials.head')
         @include('partials.navbar')

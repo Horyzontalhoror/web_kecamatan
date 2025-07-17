@@ -1,20 +1,20 @@
 <x-layouts.app :title="'Edit File Download'">
     <div class="space-y-6">
         <h2 class="text-2xl font-semibold">Edit File Download</h2>
-        <div class="rounded-xl border p-6 bg-white dark:bg-neutral-900 ...">
+        <div class="rounded-xl border p-6 bg-white dark:bg-neutral-900 shadow-sm space-y-4">
             <form method="POST" action="{{ route('download.update', $download) }}" enctype="multipart/form-data"
                 class="space-y-4">
                 @csrf
                 @method('PUT')
                 <div>
-                    <label for="judul" class="block text-sm font-medium">Nama File (Judul Tampilan)</label>
-                    <input type="text" name="judul" id="judul" required class="w-full ..."
+                    <label for="judul" class="block text-sm font-medium dark:text-neutral-200">Nama File (Judul Tampilan)</label>
+                    <input type="text" name="judul" id="judul" required class="w-full dark:text-neutral-200 bg-white dark:bg-neutral-800"
                         value="{{ old('judul', $download->judul) }}">
                 </div>
                 <div>
-                    <label for="file_download" class="block text-sm font-medium">Ganti File (Opsional)</label>
+                    <label for="file_download" class="block text-sm font-medium dark:text-neutral-200">Ganti File (Opsional)</label>
                     <p class="text-xs text-gray-500 mb-2">File saat ini: {{ basename($download->path) }}</p>
-                    <input type="file" name="file_download" id="file_download" class="w-full ...">
+                    <input type="file" name="file_download" id="file_download" class="w-full dark:text-neutral-200 bg-white dark:bg-neutral-800">
                 </div>
                 <button type="submit"
                     class="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 text-white text-sm font-medium rounded-md

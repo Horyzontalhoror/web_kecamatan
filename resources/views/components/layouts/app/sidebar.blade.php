@@ -24,8 +24,8 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Lainnya')" class="grid">
-                    <flux:navlist.item icon="building-office" :href="route('informasi')" :current="request()->routeIs('informasi')" wire:navigate>{{ __('Informasi') }}</flux:navlist.item>
-                    <flux:navlist.item icon="inbox" :href="route('layananpublik')" :current="request()->routeIs('layananpublik')" wire:navigate>{{ __('Layanan') }}</flux:navlist.item>
+                    <flux:navlist.item icon="building-office" :href="route('informasih.index')" :current="request()->routeIs('informasih.index')" wire:navigate>{{ __('Informasi') }}</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="inbox" :href="route('layananpublik.index')" :current="request()->routeIs('layananpublik.index')" wire:navigate>{{ __('Layanan') }}</flux:navlist.item> --}}
                     <flux:navlist.item icon="arrow-down-tray" :href="route('download.index')" :current="request()->routeIs('download.index')" wire:navigate>{{ __('Download') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>

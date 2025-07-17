@@ -44,21 +44,30 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'remove_foto' => 'nullable|boolean' // Add validation for the checkbox
         ]);
 
-        $validated['slug'] = Str::slug($request->judul);
-
+        // Handle the foto update logic
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($berita->foto) {
+            // Delete old photo if it exists
+            if ($berita->foto && Storage::disk('public')->exists($berita->foto)) {
                 Storage::disk('public')->delete($berita->foto);
             }
-            $validated['foto'] = $request->file('foto')->store('berita', 'public');
+            // Store new photo
+            $validated['foto'] = $request->file('foto')->store('berita-foto', 'public');
+        } elseif ($request->input('remove_foto') == 1) { // Check if the "remove" box was ticked
+            // Delete old photo
+            if ($berita->foto && Storage::disk('public')->exists($berita->foto)) {
+                Storage::disk('public')->delete($berita->foto);
+            }
+            // Set foto to null in the database
+            $validated['foto'] = null;
         }
 
         $berita->update($validated);
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
+
+        return redirect()->route('berita.show', $berita)->with('success', 'Berita berhasil diperbarui.');
     }
 
     public function destroy(Berita $berita)
@@ -69,5 +78,14 @@ class BeritaController extends Controller
         }
         $berita->delete();
         return back()->with('success', 'Berita berhasil dihapus.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Berita $berita)
+    {
+        // The 'berita' model is automatically fetched by Laravel's route-model binding.
+        return view('admin.berita.show', compact('berita'));
     }
 }

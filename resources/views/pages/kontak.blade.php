@@ -53,7 +53,7 @@
             </div>
 
             {{-- Form Kontak --}}
-            <form action="#" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+            {{-- <form action="#" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
                 <div>
                     <label for="email" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
                     <input type="email" id="email" required
@@ -76,7 +76,7 @@
                         class="w-full py-3 px-5 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 transition focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Kirim Pesan
                 </button>
-            </form>
+            </form> --}}
         </div>
     </div>
 </section>
